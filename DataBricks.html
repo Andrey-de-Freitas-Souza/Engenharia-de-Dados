@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databricks</title>
+    <link rel="stylesheet" href="styleGeral.css">
+</head>
+<body>
+    <header>
+        <h1>Engenharia de dados </h1>
+        <img src="Imagens/pngwing.com.png" alt="">
+        
+        <nav>
+            <a href="../Cursos/CursoEmVideoHTMLeCSS2/html-css/AprendendoHTML/index.html">Menu</a>
+            <a href="../Cursos/CursoEmVideoHTMLeCSS2/html-css/AprendendoHTML/HTML-CSS/pghistoriainternet.html">HTML-CSS</a>
+            <a href="../Cursos/CursoEmVideoHTMLeCSS2/html-css/AprendendoHTML/GOLANG/pgGoLang.html">GoLang</a>
+            <a href="#">Eng. de Dados</a>
+
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <a href="EngDados.html">
+                <h1 class="botao">Fundamentos</h1>
+            </a>
+            <a href="DataBricks.html">
+                <h1 class="botao">Databricks</h1>
+            </a>
+            <a href="pgCodigosGolang.html">
+                <h1 class="botao">Excel</h1>
+            </a>
+            
+        </div>
+    <h2>Principais comandos Utilizados no Databricks</h2>
+    <h3>Databricks Utilities:</h3>  
+    <code><pre>
+    dbutils.fs.cp();  &#8594 Copia arquivos 
+    dbutils.fs.ls();    &#8594 Lista os arquivos de um diretório 
+    dbutils.fs.mkdirs();  &#8594 Cria um diretório 
+    dbutils.fs.mv();   &#8594 Move um arquivo  
+    dbutils.fs.put();   &#8594 Cria ou sobrescreve um arquivo 
+    dbutils.fs.rm();   &#8594 Remove um arquivo </pre>
+    </code>
+    <h3>SQL no Databricks</h3>
+    
+        <h4>Comandos Básicos:</h4>
+        <code><pre>
+    %sql 
+    SHOW DATABASES  &#8594  Mostra os databases existentes 
+
+    %sql 
+    CREATE DATABASE IF NOT EXISTS teste &#8594 Cria um database
+    
+    %sql 
+    USE teste &#8594 indica qual database deve ser utilizado
+    
+    %sql
+    SHOW TABLES &#8594 Exibe as tabelas criadas
+    </pre></code> 
+    <hr><h4>Criando uma tabela:</h4>
+        <code><pre>
+    %sql
+    CREATE TABLE usuarios(
+        idade int,
+        estado string,
+        salario float
+    )
+    ROW FORMAT DELIMITED &#8594 <mark>Especifica que os dados estão em um formato delimitado. </mark>
+    FIELDS TERMINATED BY ','&#8594 <mark>Indica que os campos (colunas) em cada linha são separados por vírgulas.</mark>
+    LINES TERMINATED BY '\n' &#8594 <mark>Indica que cada linha é separada por uma nova linha (caractere de quebra de linha, \n)</mark>
+    STORED AS textfile &#8594 <mark>Define que os dados serão armazenados como arquivos de texto simples.</mark>
+    LOCATION '/FileStore/tables/aula-databricks/usuarios/' &#8595 
+    <mark>Especifica o caminho no sistema de arquivos onde os dados da tabela estão ou serão armazenados.</mark>
+        
+        </pre></code>
+        <hr><h4>Partições:</h4>
+        <code><pre>
+    %sql 
+    SET hive.exec.dynamic.partition = true; 
+    SET hive.exec.dynamic.partition.mode = nonstrict; 
+
+    %sql
+    CREATE TABLE usuariosPart(
+        idade int,
+        estado string,
+        salario float
+    )
+    ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    LINES TERMINATED BY '\n'
+    STORED AS textfile
+    <mark>PARTIONED BY (ano int)</mark>
+    LOCATION '/FileStore/tables/aula-databricks/usuariosPart/'
+
+    %sql
+    INSERT INTO usuariosPart 
+        PARTITION (ano=2020)
+        VALUES (30, 'SP', 6000)
+        </pre></code>
+        <hr><h4>Carregando dados:</h4>
+        <code>
+        <pre>
+    %sql
+    CREATE DATABASE IF NOT EXISTS tabela_vinhos;
+    USE tabela_vinhos;
+
+    CREATE TABLE red_wine(
+        fixed_acidity float,
+        volatile_acidity float,
+        citric_acid float,
+        residual_sugar float,
+        chlorides float,
+        free_sulfur_dioxide int,
+        total_sulfur_dioxide float,
+        density float,
+        pH float,
+        sulphates float,
+        alcohol float,
+        quality float
+    )
+    USING CSV
+        OPTIONS (
+            path '/FileStore/tables/aula-databricks/vinhos/winequality-red.csv',
+            header 'true',
+            delimiter ';'
+        );
+        </pre></code>
+        <hr><h4>Explorando os dados</h4>
+        <code><pre>
+    %sql
+    DESCRIBE red_wine  
+
+    %sql
+    SELECT DISTINCT (quality)
+        FROM red_wine
+        ORDER BY quality DESC
+    
+    %sql
+    SELECT quality, COUNT (quality) AS freq
+        FROM red_wine
+        GROUP BY quality
+        ORDER BY quality DESC
+    </pre></code>
+    <hr><h4>Juntando dados:</h4>
+        <code>
+            <pre>
+    %sql
+    CREATE OR REPLACE TABLE combined_wines 
+        AS SELECT * FROM new_red_wine
+        UNION ALL 
+        SELECT * FROM new_white_wine    
+                </pre>
+        </code>
+    <h3>Spark</h3>    
+    <h4>Criando uma tabela spark atráves de uma outra tabela:</h4>
+    <code>
+        <pre>
+    tabela = spark.table('tabela_vinhos.combined_wines')        
+        </pre>
+    </code>
+    <hr><h4>SQL com Spark</h4>
+    <code>
+    <pre>
+    spark.sql('''
+        SELECT DISTINCT (quality)
+        FROM combined_wines
+        ORDER BY quality DESC 
+        ''').show()
+        
+    spark.sql('SELECT AVG (pH) FROM combined_wines').show()
+    </pre>
+    </code>
+    <hr><h4>Registrando uma tabela</h4>
+    <code>
+        <pre>
+    resultado = spark.sql(''' 
+    SELECT *
+        FROM combined_wines
+            WHERE pH < 3
+    ''')
+        
+    type(resultado)
+    Out[82]: pyspark.sql.dataframe.DataFrame
+        </pre>
+    </code>
+    <hr><h4>Criando uma tabela temporária</h4>
+    <code>
+        <pre>
+    resultado.createOrReplaceTempView('nova_tabela')
+        </pre>
+    </code>
+    <h3>PySpark</h3>
+    <h4>Importando o PySpark:</h4>
+    <code>
+        <pre>
+    import pyspark
+    from pyspark.sql.functions import lit
+        </pre>
+    </code>
+    <hr><h4>Carregando dados:</h4>
+    <code>
+        <pre>
+    red_wine_df = spark.read.format('csv')\
+    .option('inferSchema', 'true')\
+    .option('sep', ';')\
+    .option('header', 'true')\
+    .load('/databricks-datasets/wine-quality/winequality-red.csv')
+    
+    display(red_wine_df)
+        </pre>
+    </code>
+    <hr><h4>Acrescentando coluna com o lit:   </h4>
+    <code>
+        <pre>
+    red_wine_df = red_wine_df.withColumn('wine_type', lit('red'))
+    red_wine_df.show()
+        </pre>
+    </code>
+    <hr> <h4>Juntando tabelas </h4>
+    <code>
+        <pre>
+    combined_wines = red_wine_df.union(white_wine_df)
+    display(combined_wines)    
+        </pre>
+    </code>
+    <hr><h4>Renomeando Colunas:</h4>
+    <code>
+        <pre>
+    combined_wines = combined_wines.withColumnRenamed('quality', 'nota')
+    display(combined_wines)
+        </pre>
+    </code>
+    <hr><h4>Mostrando o Schema </h4>
+    <code>
+        <pre>
+    combined_wines.printSchema()
+        </pre>
+    </code>
+    <hr><h4>Salvando como arquivo:</h4>
+    <code>
+        <pre>
+    (
+        combined_wines
+            .write
+            .option('header', True)
+            .mode('overwrite')
+            .csv('/FileStore/tables/aula-databricks/vinhos/pyspark')
+    )        
+        </pre>
+    </code>
+</main>  
+<footer>
+    <p>Site desenvolvido por <strong>Andrey de Freitas Souza</strong></p>
+</footer>  
+</body>
+</html>
