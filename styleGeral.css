@@ -152,6 +152,8 @@ main>h4{
 code>pre{
     margin: 20px 0px 20px 30px;
     font-size: 1.1em;
+    overflow-x: auto;
+    max-width: 100%;
 
 }
 code>{
