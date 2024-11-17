@@ -149,6 +149,16 @@ main>h4{
 
 }
 
+.comparacao{
+    max-width: 70%;
+    overflow-x: auto;
+    
+
+}
+
+.divimagem{
+    text-align: center;
+}
 code>pre{
     margin: 20px 0px 20px 30px;
     font-size: 1.1em;
@@ -170,3 +180,46 @@ footer{
     text-align: center;
     color: white;
 }
+
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 0.8em;
+    margin: 20px;
+  }
+  
+  /* Estiliza a tabela */
+  table {
+    width: 100%; /* Faz a tabela ocupar toda a largura do contêiner */
+    border-collapse: collapse; /* Remove espaços entre as bordas */
+    margin-top: 20px;
+    
+  }
+  
+  /* Cabeçalho da tabela */
+  thead {
+    background-color: #048500;
+    text-align: center;
+    color: white;
+    font-size: 1.3em;
+  }
+  
+  th, td {
+    padding: 12px; /* Espaçamento interno */
+    
+    border: 1px solid #ddd; /* Bordas */
+  }
+  
+  /* Estiliza linhas alternadas no corpo da tabela */
+  tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+  /* Destaca a linha ao passar o mouse */
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }

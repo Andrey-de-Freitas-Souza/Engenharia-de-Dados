@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel</title>
+    <link rel="stylesheet" href="styleGeral.css">
+</head>
+<body>
+    <header>
+        <h1>Engenharia de dados </h1>
+        <img src="Imagens/pngwing.com.png" alt="">
+        
+        <nav>
+            <a href="../Cursos/CursoEmVideoHTMLeCSS2/html-css/AprendendoHTML/index.html">Menu</a>
+            <a href="../Cursos/CursoEmVideoHTMLeCSS2/html-css/AprendendoHTML/HTML-CSS/pghistoriainternet.html">HTML-CSS</a>
+            <a href="../Cursos/CursoEmVideoHTMLeCSS2/html-css/AprendendoHTML/GOLANG/pgGoLang.html">GoLang</a>
+            <a href="#">Eng. de Dados</a>
+
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <a href="EngDados.html">
+                <h1 class="botao">Fundamentos</h1>
+            </a>
+            <a href="DataBricks.html">
+                <h1 class="botao">Databricks</h1>
+            </a>
+            <a href="Excel.html">
+                <h1 class="botao">Excel</h1>
+            </a>
+            
+        </div>
+    <h2>Excel</h2>
+    <h3>Funções</h3>
+    <code>
+        <pre>
+            =SE(Teste lógico;"Valor se verdadeiro";"Valor se falso")
+
+            =SES(Teste lógico;"Valor se verdadeiro";Teste lógico;"Valor se verdadeiro",...,"Valor se falso")
+
+            =SEERRO(Função;"Valor que deve ser exibido caso a função gere um erro")
+
+            =PROCX("Valor a ser encontrado"; Onde deve ser proucurado;"O que devolver")
+
+            =CORRESP(valor_procurado, matriz_procurada, [tipo_correspondência])
+
+            =ÍNDICE(matriz, núm_linha, [núm_coluna])
+        </pre>
+    </code>
+    <h3>Atalhos</h3>
+    <h4>Operações de movimentação em células e planilhas</h4>
+    <table>
+        <thead>
+          <tr>
+            <th>Tecla de Atalho</th>
+            <th>Ação ao Pressionar</th>
+          </tr>
+        </thead> 
+        <tbody>
+          <tr>
+            <td>→</td>
+            <td>Move o seletor uma célula para a direita.</td>
+          </tr>
+          <tr>
+            <td>←</td>
+            <td>Move o seletor uma célula para a esquerda.</td>
+          </tr>
+          <tr>
+            <td>↑</td>
+            <td>Move o seletor uma célula para cima.</td>
+          </tr>
+          <tr>
+            <td>↓</td>
+            <td>Move o seletor uma célula para baixo.</td>
+          </tr>
+          <tr>
+            <td>Home</td>
+            <td>Move o seletor para a primeira célula da linha atual.</td>
+          </tr>
+          <tr>
+            <td>End</td>
+            <td>Ativa o modo Término e, com isso, você pode pressionar uma tecla de <br>direção para mover para a última célula da linha/coluna atual.</td>
+          </tr>
+          <tr>
+            <td>CTRL + → ou End + →</td>
+            <td>Move o seletor para a última célula preenchida da linha atual.</td>
+          </tr>
+          <tr>
+            <td>CTRL + ← ou End + ←</td>
+            <td>Move o seletor para a primeira célula preenchida da linha atual.</td>
+          </tr>
+          <tr>
+            <td>CTRL + ↑ ou End + ↑</td>
+            <td>Move o seletor para a última célula preenchida da coluna atual.</td>
+          </tr>
+          <tr>
+            <td>CTRL + ↓ ou End + ↓</td>
+            <td>Move o seletor para a primeira célula preenchida da coluna atual.</td>
+          </tr>
+          <tr>
+            <td>CTRL + Home</td>
+            <td>Move o seletor para a célula A1.</td>
+          </tr>
+          <tr>
+            <td>CTRL + End</td>
+            <td>Move o seletor para a última célula preenchida da planilha.</td>
+          </tr>
+          <tr>
+            <td>TAB</td>
+            <td>Move o seletor para a direita e move para a próxima opção em uma caixa de diálogo.</td>
+          </tr>
+          <tr>
+            <td>SHIFT + TAB</td>
+            <td>Move o seletor para a esquerda e move para a opção anterior em uma caixa de diálogo.</td>
+          </tr>
+          <tr>
+            <td>CTRL + TAB</td>
+            <td>Alterna para a próxima guia em uma caixa de diálogo.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + TAB</td>
+            <td>Alterna para a guia anterior em uma caixa de diálogo.</td>
+          </tr>
+          <tr>
+            <td>CTRL + PgDn</td>
+            <td>Ativa a próxima planilha à direita.</td>
+          </tr>
+          <tr>
+            <td>CTRL + PgUp</td>
+            <td>Ativa a próxima planilha à esquerda.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Operações de seleção em células e planilhas</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Tecla de Atalho</th>
+            <th>Ação ao Pressionar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CTRL + T</td>
+            <td>Seleciona a região atual (se tiver dados). Pressionando CTRL + T novamente, seleciona a planilha inteira.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + O</td>
+            <td>Seleciona todas as células com comentários.</td>
+          </tr>
+          <tr>
+            <td>F8</td>
+            <td>Ativa/desativa o modo de seleção estendida.</td>
+          </tr>
+          <tr>
+            <td>SHIFT + F8</td>
+            <td>Adiciona células não adjacentes à seleção, usando o mouse ou o teclado.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + End</td>
+            <td>Estende a seleção das células até a última célula preenchida da planilha.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + Home</td>
+            <td>Estende a seleção das células até a primeira célula da planilha.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + PgDn</td>
+            <td>Seleciona a planilha atual e a próxima planilha.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + PgUp</td>
+            <td>Seleciona a planilha atual e a anterior.</td>
+          </tr>
+          <tr>
+            <td>CTRL + Barra de Espaço</td>
+            <td>Seleciona uma coluna inteira.</td>
+          </tr>
+          <tr>
+            <td>SHIFT + Barra de Espaço</td>
+            <td>Seleciona uma linha inteira.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + *</td>
+            <td>Seleciona a região em volta da célula ativa.</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Tecla de Atalho</th>
+            <th>Ação ao Pressionar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <h4>Primeira seção</h4>
+          <tr>
+            <td>F2</td>
+            <td>Edita a célula ativa e posiciona o cursor no final do conteúdo da célula.</td>
+          </tr>
+          <tr>
+            <td>CTRL + C</td>
+            <td>Copia as células/objetos selecionados.</td>
+          </tr>
+          <tr>
+            <td>CTRL + X</td>
+            <td>Recorta as células/objetos selecionados.</td>
+          </tr>
+          <tr>
+            <td>CTRL + V</td>
+            <td>Cole o conteúdo (copiado ou recortado) na posição atual.</td>
+          </tr>
+          <tr>
+            <td>CTRL + ALT + V</td>
+            <td>
+              Exibe a caixa de diálogo Colar Especial. O comando Colar Especial fica disponível após copiar ou recortar.
+            </td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + +</td>
+            <td>Inserir células, linhas ou colunas.</td>
+          </tr>
+          <tr>
+            <td>CTRL + D</td>
+            <td>Preenche para baixo com o conteúdo da célula ativa.</td>
+          </tr>
+          <tr>
+            <td>CTRL + R</td>
+            <td>Preenche para o lado direito com o conteúdo da célula ativa.</td>
+          </tr>
+          <tr>
+            <td>CTRL + F</td>
+            <td>Pesquisador usando o comando Localizar.</td>
+          </tr>
+          <tr>
+            <td>CTRL + U</td>
+            <td>Substitui dados usando o comando Substituir.</td>
+          </tr>
+          <tr>
+            <td>CTRL + Y ou F4</td>
+            <td>Repete o último comando ou ação (se possível).</td>
+          </tr>
+          <tr>
+            <td>ALT + Enter</td>
+            <td>Insere uma quebra de linha.</td>
+          </tr>
+          <tr>
+            <td>CTRL + Enter</td>
+            <td>
+              Insere um valor em modo de edição, insere o conteúdo da célula ativa em todas as células selecionadas.
+            </td>
+          </tr>
+          <tr>
+            <td>SHIFT + Enter</td>
+            <td>Confirma o valor inserido da célula e seleciona a célula acima.</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h4>Operações de Formatação</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Tecla de Atalho</th>
+            <th>Ação ao Pressionar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CTRL + N</td>
+            <td>Aplica/remove o estilo negrito.</td>
+          </tr>
+          <tr>
+            <td>CTRL + I</td>
+            <td>Aplica/remove o estilo itálico.</td>
+          </tr>
+          <tr>
+            <td>CTRL + U</td>
+            <td>Aplica/remove o estilo sublinhado.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + &</td>
+            <td>Aplica bordas externas à célula ou intervalo selecionado.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + ~</td>
+            <td>Aplica o formato de número geral.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + $</td>
+            <td>Aplica o formato de moeda com duas casas decimais.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + %</td>
+            <td>Aplica o formato de porcentagem.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + ^</td>
+            <td>Aplica o formato de número científico.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + #</td>
+            <td>Aplica o formato de data com dia, mês e ano.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + @</td>
+            <td>Aplica o formato de hora com hora e minuto.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + !</td>
+            <td>
+              Aplica o formato de número com duas casas decimais e separador de milhar.
+            </td>
+          </tr>
+          <tr>
+            <td>CTRL + 1</td>
+            <td>Abre a caixa de diálogo Formatar Células.</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h4>Operações de Inserção</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Tecla de Atalho</th>
+            <th>Ação ao Pressionar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CTRL + K</td>
+            <td>Exibe a caixa de diálogo Inserir/Editar Hyperlink.</td>
+          </tr>
+          <tr>
+            <td>CTRL + ALT + T</td>
+            <td>Criar tabela.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + ;</td>
+            <td>Insere a data atual.</td>
+          </tr>
+          <tr>
+            <td>CTRL + SHIFT + :</td>
+            <td>Insere a hora atual.</td>
+          </tr>
+          <tr>
+            <td>ALT + SHIFT + F1</td>
+            <td>Insere um gráfico em uma nova planilha de gráfico.</td>
+          </tr>
+          <tr>
+            <td>SHIFT + F2</td>
+            <td>Insere/edita um comentário na célula ativa.</td>
+          </tr>
+        </tbody>
+      </table>
+            
+    
+    
+    
+
+</main>  
+<footer>
+    <p>Site desenvolvido por <strong>Andrey de Freitas Souza</strong></p>
+</footer>    
+</body>
+</html>

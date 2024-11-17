@@ -27,7 +27,7 @@
             <a href="DataBricks.html">
                 <h1 class="botao">Databricks</h1>
             </a>
-            <a href="pgCodigosGolang.html">
+            <a href="Excel.html">
                 <h1 class="botao">Excel</h1>
             </a>
             
@@ -190,6 +190,24 @@
     resultado.createOrReplaceTempView('nova_tabela')
         </pre>
     </code>
+    <hr><h4>Lendo arquivos:</h4>
+    <code>
+        <pre>
+    df = spark.read.json('/FileStore/tables/Aulas-databricks-Curso2/Saneamento.json')
+    display(df)
+
+    df_text = spark.read.format("text")\
+    .load("/FileStore/tables/Aulas-databricks-Curso2/txt/")
+    display(df_text)
+        </pre>
+    </code>
+    <hr><h4>Aplicando um filtro:</h4>
+    <code>
+        <pre>
+    df = df.filter(df.valor != "Valor")
+    display(df)
+        </pre>
+    </code>
     <h3>PySpark</h3>
     <h4>Importando o PySpark:</h4>
     <code>
@@ -208,6 +226,9 @@
     .load('/databricks-datasets/wine-quality/winequality-red.csv')
     
     display(red_wine_df)
+
+    df = ps.read_csv(local_do_arquivo,index_col = 'curso_id')
+    display(df)
         </pre>
     </code>
     <hr><h4>Acrescentando coluna com o lit:   </h4>
@@ -227,8 +248,7 @@
     <hr><h4>Renomeando Colunas:</h4>
     <code>
         <pre>
-    combined_wines = combined_wines.withColumnRenamed('quality', 'nota')
-    display(combined_wines)
+    df = df.rename(columns={'nome': 'nome_curso'})
         </pre>
     </code>
     <hr><h4>Mostrando o Schema </h4>
@@ -247,6 +267,98 @@
             .mode('overwrite')
             .csv('/FileStore/tables/aula-databricks/vinhos/pyspark')
     )        
+        </pre>
+    </code>
+    <hr><h4>Modificando tipos das colunas:</h4>
+    <code>
+        <pre>
+    from pyspark.sql.functions import col
+    from pyspark.sql.types import IntegerType
+
+    df_new = df.withColumn("cod_regiao",col("cod_regiao").cast(IntegerType()))\
+            .withColumn("cod_variavel", col("cod_variavel").cast(IntegerType()))\
+            .withColumn("cod_ano", col("cod_ano").cast(IntegerType()))\
+            .withColumn("ano", col("ano").cast(IntegerType()))\
+            .withColumn("cod_doenca", col("cod_doenca").cast(IntegerType()))\
+            .withColumn("cod_medida", col("cod_medida").cast(IntegerType()))\
+            .withColumn("cod_nivel_territorial", col("cod_nivel_territorial").cast(IntegerType()))\
+            .withColumn("valor", col("valor").cast(IntegerType()))
+
+    df_new.printSchema()
+        </pre>
+    </code>
+    <hr><h4>Removendo coluna:</h4>
+    <code>
+        <pre>
+    df.drop(['curso_busca'],axis=1) 
+        </pre>
+    </code>
+    <hr><h4>Salvando arquivos:</h4>
+    <code>
+        <pre>
+    df.write\
+    .option("sep",",")\
+    .option("header",True)\
+    .mode("overwrite")\
+    .format("csv")\
+    .save("/FileStore/tables/Aulas-databricks-Curso2/jason_csv/")      
+        </pre>
+    </code>
+    <h3>Análise de dados</h3>
+    <h4>Contagem:</h4>
+    <code>
+        <pre>
+    df[df['nome_curso']=='Medicina']['nome_curso'].count()
+
+    </pre></code>
+
+    <hr><h4>Média:</h4>   
+    <code><pre>
+    df_medicina['mensalidade'].mean()
+    </pre></code>  
+    <hr><h4>Mostra os registros distintos:</h4>   
+    <code><pre>   
+    df['turno'].unique()
+    </pre></code>
+    <hr><h4>Filtros:</h4>   
+    <code><pre>   
+    df[(df['turno']=='Integral') & (df['nome_curso']=='Medicina')]['nome_curso'].count()
+
+    df_medicina = df.query("nome_curso == 'Medicina'")
+    </pre></code>
+    <hr><h4>Exclui valores nulos:</h4>   
+    <code><pre>
+    df.dropna(inplace=True)
+    </pre></code>  
+
+    <hr><h4>Group by e sort:</h4>   
+    <code><pre>   
+    agrupado = df_medicina.query("turno == 'Integral' or turno == 'Matutino'").groupby('uf_busca')['mensalidade'].mean()
+
+    df_agrupado.sort_values(by='mensalidade',inplace=True, ascending=False)
+    </pre></code>    
+    <hr><h4>Gráficos:</h4>   
+    <code><pre>
+    df.style.background_gradient(axis=0)
+
+    df_agrupado.plot.bar(x='uf_busca',y='mensalidade')
+
+    df[df['turno']=='Integral']['mensalidade'].plot.box()
+
+    df_medicina.plot.scatter(x='nota_parcial_ampla',y='nota_parcial_cotas',trendline='ols',trendline_color_override='red')
+    </pre></code>     
+    
+    
+    <hr><h4>Puxando informações de um Site:</h4>
+    <code>
+        <pre>
+    !pip install lxml
+    
+    url = 'https://pt.wikipedia.org/wiki/Ensino_superior_no_Brasil'
+
+    lista = ps.read_html(url)
+
+    df_publicas = lista[0]
         </pre>
     </code>
 </main>  
